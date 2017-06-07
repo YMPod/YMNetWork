@@ -7,23 +7,21 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'YMNetWork'
-  s.version          = '0.0.2'
-  s.summary          = 'request ${POD_NAME}.'
+  s.name             = 'YMNetWorking'
+  s.version          = '0.0.3'
+  s.summary          = ' private comment NetWork .idea from castwy'
 
 
 
   s.description      = <<-DESC
-TODO: request request request request request 
-request request request request request 
-request request request request request 
-request request request request request 
-request request request request request 
+
+  通用网络库，思路来源  castwy
+
                        DESC
 
   s.homepage         = 'https://github.com/YMPod/YMNetWork'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author             = { "yangm" => "yangming@1yd.me" }
+  s.author             = { "yangm" => "13120690401@163.com" }
   s.source       = { :git => "https://github.com/YMPod/YMNetWork.git", :tag => "#{s.version}" }
 
 
