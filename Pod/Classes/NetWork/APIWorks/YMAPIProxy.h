@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "YMAPIResponse.h"
-#import "AFNetWorking.h"
-
+#import "YMMultipartFormData.h"
 
 typedef void(^YMAPIProxyCallBack)(YMAPIResponse *response);
 
@@ -34,7 +33,7 @@ typedef void(^YMAPIProxyCallBack)(YMAPIResponse *response);
                          requestType:(NSString *)type
                         headerFields:(NSDictionary *)fields
                             progress:(void (^)(NSProgress *))progress
-                            fileData:(void (^)(id<AFMultipartFormData>))fileData
+                            fileData:(void (^)(id<YMMultipartFormData>))fileData
                              success:(YMAPIProxyCallBack)success
                                 fail:(YMAPIProxyCallBack)fail;
 

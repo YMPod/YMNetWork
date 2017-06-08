@@ -23,6 +23,8 @@
 #import "YMLog.h"
 #import "YMCacheTimeOutProtocol.h"
 #import "YMCallBackDataValidatorProtocol.h"
+#import "YMMultipartFormData.h"
+#import "YMProtocol.h"
 #import "YMRequestGeneratorProtocol.h"
 #import "YMAPIService.h"
 #import "YMAPIServiceFactory.h"

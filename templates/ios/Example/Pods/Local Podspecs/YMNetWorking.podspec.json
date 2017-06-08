@@ -1,6 +1,6 @@
 {
   "name": "YMNetWorking",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "summary": "private comment NetWork .idea from castwy",
   "description": "通用网络库，思路来源  castwy",
   "homepage": "https://github.com/YMPod/YMNetWork",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/YMPod/YMNetWork.git",
-    "tag": "0.0.3"
+    "tag": "0.0.4"
   },
   "platforms": {
     "ios": "8.0"

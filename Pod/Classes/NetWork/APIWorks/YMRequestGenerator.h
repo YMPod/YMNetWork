@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "YMRequestGeneratorProtocol.h"
-#import "AFNetworking.h"
-
+#import "YMMultipartFormData.h"
 @interface YMRequestGenerator : NSObject
 
 
@@ -28,6 +27,6 @@
                                        methodName:(NSString *)methodName
                                       requestType:(NSString *)type
                                      headerFields:(NSDictionary *)fields
-                                         fileData:(void (^)(id<AFMultipartFormData>   formData))block;
+                                         fileData:(void (^)(id<YMMultipartFormData>   formData))block;
 
 @end

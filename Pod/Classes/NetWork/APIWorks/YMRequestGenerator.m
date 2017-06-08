@@ -11,6 +11,8 @@
 #import "YMAPIServiceFactory.h"
 #import "NSURLRequest+ymRequestParams.h"
 #import "YMLog.h"
+#import "AFNetWorking.h"
+
 @interface YMRequestGenerator ()
 
 @property (nonatomic,strong) AFHTTPRequestSerializer *formSerializer;
@@ -93,7 +95,7 @@
                                        methodName:(NSString *)methodName
                                       requestType:(NSString *)type
                                      headerFields:(NSDictionary *)fields
-                                         fileData:(void (^)(id<AFMultipartFormData>  _Nonnull formData))block{
+                                         fileData:(void (^)(id<YMMultipartFormData>  _Nonnull formData))block{
     
     NSError *serializationError = nil;
     AFHTTPRequestSerializer *serializer = self.formSerializer;
@@ -117,7 +119,7 @@
     [requestParams setValuesForKeysWithDictionary:params];
     [requestParams setValuesForKeysWithDictionary:tempParamDic];
     
-    NSMutableURLRequest *request = [serializer multipartFormRequestWithMethod:@"POST" URLString:urlString parameters:requestParams constructingBodyWithBlock:block error:&serializationError];
+    NSMutableURLRequest *request = [serializer multipartFormRequestWithMethod:@"POST" URLString:urlString parameters:requestParams constructingBodyWithBlock:^(id xx){block(xx);} error:&serializationError];
     
     request.requestParams = requestParams;
     

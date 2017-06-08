@@ -11,9 +11,7 @@
 
 #import "YMBaseAPIManager.h"
 #import "YMNetWorkManager.h"
-#import "YMRequestGeneratorProtocol.h"
-#import "YMCacheTimeOutProtocol.h"
-#import "YMCallBackDataValidatorProtocol.h"
-
+#import "YMAPIService.h"
+#import "YMProtocol.h"
 
 #endif /* YMNetWork_h */

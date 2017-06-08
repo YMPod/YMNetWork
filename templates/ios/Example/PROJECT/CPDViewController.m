@@ -43,7 +43,7 @@
     return nil;
 }
 
-- (void)manager:(YMBaseAPIManager *)manager fileData:(id<AFMultipartFormData>)data{
+- (void)manager:(YMBaseAPIManager *)manager fileData:(id<YMMultipartFormData>)data{
     if ([manager isKindOfClass:[CPDT2APIManager class]]) {
         
         NSData *imageData = UIImagePNGRepresentation([UIImage imageNamed:@"2.png"]);

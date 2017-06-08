@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AFNetworking.h"
+
+
 @class YMBaseAPIManager;
 @class YMAPIResponse;
 
@@ -115,12 +116,14 @@ typedef void(^FetchCallBackBlock)(Boolean isSuccess,id responseData,YMBaseAPIMan
 @protocol YMAPIManagerDownUploadProtocol <NSObject>
 
 //数据
-- (void)manager:(YMBaseAPIManager *)manager fileData:(id<AFMultipartFormData>) data;
+- (void)manager:(YMBaseAPIManager *)manager fileData:(id) data;
 
 //进度条
 - (void)manager:(YMBaseAPIManager *)manager progress:(NSProgress *)progress;
 
 @end
+
+
 
 
 

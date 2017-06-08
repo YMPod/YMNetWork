@@ -77,7 +77,7 @@
                          requestType:(NSString *)type
                         headerFields:(NSDictionary *)fields
                             progress:(void (^)(NSProgress *))progress
-                            fileData:(void (^)(id<AFMultipartFormData>))fileData
+                            fileData:(void (^)(id<YMMultipartFormData>))fileData
                              success:(YMAPIProxyCallBack)success
                                 fail:(YMAPIProxyCallBack)fail{
     

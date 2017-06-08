@@ -152,7 +152,7 @@ static NSString *const kAPIManagerRequestID = @"kAPIRequestID";
                                                                if (self.downUpAop) {
                                                                    [self.downUpAop manager:self progress:progress];
                                                                }
-                                                           } fileData:^(id<AFMultipartFormData> fileData) {
+                                                           } fileData:^(id<YMMultipartFormData> fileData) {
                                                                if (self.downUpAop && [self.downUpAop respondsToSelector:@selector(manager:fileData:)]) {
                                                                    [self.downUpAop manager:self fileData:fileData];
                                                                }
