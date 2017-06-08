@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		3296EF531EE7A3D200557B2E /* T1ApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3296EF501EE7A3D200557B2E /* T1ApiManager.m */; };
 		3296EF541EE7A3D200557B2E /* T1Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 3296EF521EE7A3D200557B2E /* T1Service.m */; };
+		32D0E0C41EE7FC6200E2510D /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 32D0E0C31EE7FC6200E2510D /* 1.png */; };
+		32D0E0C71EE7FCD600E2510D /* CPDT2APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D0E0C61EE7FCD600E2510D /* CPDT2APIManager.m */; };
+		32D0E0CA1EE7FCF400E2510D /* CPDT2Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D0E0C91EE7FCF400E2510D /* CPDT2Service.m */; };
+		32D0E0CE1EE8F55A00E2510D /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 32D0E0CD1EE8F55A00E2510D /* 2.png */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -42,6 +46,12 @@
 		3296EF501EE7A3D200557B2E /* T1ApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = T1ApiManager.m; sourceTree = "<group>"; };
 		3296EF511EE7A3D200557B2E /* T1Service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T1Service.h; sourceTree = "<group>"; };
 		3296EF521EE7A3D200557B2E /* T1Service.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = T1Service.m; sourceTree = "<group>"; };
+		32D0E0C31EE7FC6200E2510D /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		32D0E0C51EE7FCD600E2510D /* CPDT2APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDT2APIManager.h; sourceTree = "<group>"; };
+		32D0E0C61EE7FCD600E2510D /* CPDT2APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDT2APIManager.m; sourceTree = "<group>"; };
+		32D0E0C81EE7FCF400E2510D /* CPDT2Service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDT2Service.h; sourceTree = "<group>"; };
+		32D0E0C91EE7FCF400E2510D /* CPDT2Service.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDT2Service.m; sourceTree = "<group>"; };
+		32D0E0CD1EE8F55A00E2510D /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		506731F4B2ECCA4E7F326162 /* Pods-PROJECT_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PROJECT_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-PROJECT_Example/Pods-PROJECT_Example.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* PROJECT_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PROJECT_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -129,10 +139,16 @@
 		6003F593195388D20070C39A /* Example for PROJECT */ = {
 			isa = PBXGroup;
 			children = (
+				32D0E0CD1EE8F55A00E2510D /* 2.png */,
+				32D0E0C31EE7FC6200E2510D /* 1.png */,
 				3296EF4F1EE7A3D200557B2E /* T1ApiManager.h */,
 				3296EF501EE7A3D200557B2E /* T1ApiManager.m */,
+				32D0E0C51EE7FCD600E2510D /* CPDT2APIManager.h */,
+				32D0E0C61EE7FCD600E2510D /* CPDT2APIManager.m */,
 				3296EF511EE7A3D200557B2E /* T1Service.h */,
 				3296EF521EE7A3D200557B2E /* T1Service.m */,
+				32D0E0C81EE7FCF400E2510D /* CPDT2Service.h */,
+				32D0E0C91EE7FCF400E2510D /* CPDT2Service.m */,
 				6003F59C195388D20070C39A /* CPDAppDelegate.h */,
 				6003F59D195388D20070C39A /* CPDAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
@@ -272,10 +288,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32D0E0CE1EE8F55A00E2510D /* 2.png in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				32D0E0C41EE7FC6200E2510D /* 1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,7 +360,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32D0E0C71EE7FCD600E2510D /* CPDT2APIManager.m in Sources */,
 				6003F59E195388D20070C39A /* CPDAppDelegate.m in Sources */,
+				32D0E0CA1EE7FCF400E2510D /* CPDT2Service.m in Sources */,
 				6003F5A7195388D20070C39A /* CPDViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				3296EF531EE7A3D200557B2E /* T1ApiManager.m in Sources */,

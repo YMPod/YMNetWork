@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YMNetWorking'
-  s.version          = '0.0.3'
+  s.version          = '0.0.4'
   s.summary          = ' private comment NetWork .idea from castwy'
 
 
@@ -63,6 +63,6 @@ Pod::Spec.new do |s|
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
  s.requires_arc = true
-  s.dependency "AFNetworking", "~> 2.5.4"
+  s.dependency "AFNetworking", "~> 3.1.0"
 
 end

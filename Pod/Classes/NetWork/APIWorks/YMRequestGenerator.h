@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "YMRequestGeneratorProtocol.h"
-@interface YMRequestGenerator : NSObject
+#import "AFNetworking.h"
 
+@interface YMRequestGenerator : NSObject
 
 
 + (instancetype)shareInstance;
@@ -21,5 +22,12 @@
                                  methodName:(NSString *)methodName
                                 requestType:(NSString *)type
                                headerFields:(NSDictionary *)fields;
+
+- (NSURLRequest *)generateUploadRequestWithParams:(NSDictionary *)params
+                                serviceIdentifier:(NSString *)identifier
+                                       methodName:(NSString *)methodName
+                                      requestType:(NSString *)type
+                                     headerFields:(NSDictionary *)fields
+                                         fileData:(void (^)(id<AFMultipartFormData>   formData))block;
 
 @end

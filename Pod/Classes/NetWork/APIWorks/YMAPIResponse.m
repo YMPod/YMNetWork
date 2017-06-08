@@ -121,7 +121,10 @@ static id AFJSONObjectByRemovingKeysWithNullValuesCopy(id JSONObject, NSJSONRead
 }
 
 /** AF 解决null方法 */
-- (NSDictionary *)conversationData:(NSData *)rowData{
+- (NSObject *)conversationData:(NSData *)rowData{
+    if ([rowData isKindOfClass:[NSDictionary class]] || [rowData isKindOfClass:[NSArray class]]) {
+        return rowData;
+    }
     id responseObject = nil;
     NSError *serializationError = nil;
     BOOL isSpace = [rowData isEqualToData:[NSData dataWithBytes:" " length:1]];

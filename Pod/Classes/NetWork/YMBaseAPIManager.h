@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "AFNetworking.h"
 @class YMBaseAPIManager;
 @class YMAPIResponse;
 
@@ -112,6 +112,17 @@ typedef void(^FetchCallBackBlock)(Boolean isSuccess,id responseData,YMBaseAPIMan
 
 @end
 
+@protocol YMAPIManagerDownUploadProtocol <NSObject>
+
+//数据
+- (void)manager:(YMBaseAPIManager *)manager fileData:(id<AFMultipartFormData>) data;
+
+//进度条
+- (void)manager:(YMBaseAPIManager *)manager progress:(NSProgress *)progress;
+
+@end
+
+
 
 /************************************************
  BaseAPIManager
@@ -122,6 +133,8 @@ typedef void(^FetchCallBackBlock)(Boolean isSuccess,id responseData,YMBaseAPIMan
 @property (nonatomic,weak) id<YMAPIManagerCallBackDelegate> delegate;
 @property (nonatomic,weak) id<YMAPIManagerValidator> validator;
 @property (nonatomic,weak) id<YMAPIManagerInterceptor> interceptor;
+@property (nonatomic,weak) id<YMAPIManagerDownUploadProtocol> downUpAop;
+
 
 @property (nonatomic,weak) NSObject<YMAPIManagerInfo> *child;
 @property (nonatomic,copy,readonly) NSString *errorMessage;
@@ -133,6 +146,14 @@ typedef void(^FetchCallBackBlock)(Boolean isSuccess,id responseData,YMBaseAPIMan
 - (id)fetchDataWithReformer:(id<YMAPIManagerCallBackDateReformer>) reformer;
 
 - (NSInteger)loadData;
+- (NSInteger)loadDataWithParams:(NSDictionary *)params
+                   headerFields:(NSDictionary *)headerFields;
+
+- (NSInteger)loadDataWithParam:(NSDictionary *)params
+                  headerFields:(NSDictionary *)headerFields
+                      callBack:(FetchCallBackBlock)fetchCallBack;
+
+- (NSInteger)uploadData;
 
 - (void)cancelAllRequests;
 - (void)cancelRequestByRequsetID:(NSInteger)requestID;

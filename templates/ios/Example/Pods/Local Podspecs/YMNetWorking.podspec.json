@@ -1,15 +1,15 @@
 {
   "name": "YMNetWorking",
   "version": "0.0.3",
-  "summary": "request ${POD_NAME}.",
-  "description": "TODO: request request request request request \nrequest request request request request \nrequest request request request request \nrequest request request request request \nrequest request request request request",
+  "summary": "private comment NetWork .idea from castwy",
+  "description": "通用网络库，思路来源  castwy",
   "homepage": "https://github.com/YMPod/YMNetWork",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "yangm": "yangming@1yd.me"
+    "yangm": "13120690401@163.com"
   },
   "source": {
     "git": "https://github.com/YMPod/YMNetWork.git",
@@ -22,7 +22,7 @@
   "requires_arc": true,
   "dependencies": {
     "AFNetworking": [
-      "~> 2.5.4"
+      "~> 3.1.0"
     ]
   }
 }

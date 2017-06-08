@@ -65,6 +65,22 @@ static NSString *const kAPIManagerRequestID = @"kAPIRequestID";
     return requestID;
 }
 
+- (NSInteger)loadDataWithParam:(NSDictionary *)params
+                  headerFields:(NSDictionary *)headerFields
+                      callBack:(FetchCallBackBlock)fetchCallBack;{
+    self.fetchCallBackBlock = fetchCallBack;
+    return [self loadDataWithParams:params headerFields:headerFields];
+}
+
+
+- (NSInteger)uploadData{
+    NSDictionary *params    = [self.paramSource paramsForAPi:self];
+    NSDictionary *fields    = [self.paramSource headerFieldsForAPi:self];
+    NSInteger requestID     = [self uploadDataWithParams:params headerFields:fields];
+    return requestID;
+}
+
+
 - (NSInteger)loadDataWithParams:(NSDictionary *)params
                    headerFields:(NSDictionary *)headerFields{
     
@@ -93,6 +109,62 @@ static NSString *const kAPIManagerRequestID = @"kAPIRequestID";
                                                                         [self failedOnCallingAPI:response
                                                                                    withErrorType:YMAPIManagerErrorTypeDefault];
                                                                     }];
+                
+                [self.requestIDList addObject:@(requestID)];
+                NSMutableDictionary *tempParams = [apiParams mutableCopy];
+                tempParams[kAPIManagerRequestID] = @(requestID);
+                [self afterCallingAPIWithParams:params];
+                return requestID;
+            }else{
+                [self failedOnCallingAPI:nil withErrorType:YMAPIManagerErrorTypeNoNetWork];
+                return requestID;
+            }
+        }else{
+            [self failedOnCallingAPI:nil withErrorType:YMAPIManagerErrorTypeParamsError];
+            return requestID;
+        }
+    }
+    return requestID;
+}
+
+/**
+ *  上传数据文件
+ */
+- (NSInteger)uploadDataWithParams:(NSDictionary *)params
+                   headerFields:(NSDictionary *)headerFields{
+    
+    NSInteger requestID = 0;
+    NSDictionary *apiParams = params;
+    if ([self shouldCallApiWithParams:apiParams]) {
+        if ([self validatorCallApiWithParams:apiParams]) {
+            
+            //缓存
+            //上传不适用缓存
+            
+            if ([self isReachable]) {
+                
+                
+                [[YMAPIProxy shareInstance] callUploadAPIWithParams:apiParams serviceIdentifier: self.child.serviceType
+                                                         methodName:self.child.methodName
+                                                        requestType:self.child.requestType
+                                                       headerFields:headerFields
+                                                           progress:^(NSProgress *progress) {
+                                                               if (self.downUpAop) {
+                                                                   [self.downUpAop manager:self progress:progress];
+                                                               }
+                                                           } fileData:^(id<AFMultipartFormData> fileData) {
+                                                               if (self.downUpAop && [self.downUpAop respondsToSelector:@selector(manager:fileData:)]) {
+                                                                   [self.downUpAop manager:self fileData:fileData];
+                                                               }
+                                                           }
+                 
+                 
+                                                            success:^(YMAPIResponse *response) {
+                                                                [self successOnCallingAPI:response];
+                                                            }fail:^(YMAPIResponse *response) {
+                                                                [self failedOnCallingAPI:response
+                                                                           withErrorType:YMAPIManagerErrorTypeDefault];
+                                                            }];
                 
                 [self.requestIDList addObject:@(requestID)];
                 NSMutableDictionary *tempParams = [apiParams mutableCopy];

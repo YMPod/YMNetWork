@@ -9,8 +9,9 @@
 #import "CPDViewController.h"
 #import "YMNetWork.h"
 #import "T1ApiManager.h"
+#import "CPDT2APIManager.h"
 
-@interface CPDViewController ()<YMRequestGeneratorProtocol,YMCallBackDataValidatorProtocol,YMCacheTimeOutProtocol>
+@interface CPDViewController ()<YMRequestGeneratorProtocol,YMCallBackDataValidatorProtocol,YMCacheTimeOutProtocol,YMAPIManagerParamSourceDelegate,YMAPIManagerDownUploadProtocol>
 
 @end
 
@@ -26,9 +27,55 @@
     
     
     
-    T1ApiManager *t1 = [[T1ApiManager alloc] init];
-    [t1 loadData];
+//    T1ApiManager *t1 = [[T1ApiManager alloc] init];
+//    [t1 loadData];
+    
+    CPDT2APIManager *t2 = [[CPDT2APIManager alloc] init];
+    t2.paramSource = self;
+    t2.downUpAop = self;
+    [t2 uploadData];
 }
+
+- (NSDictionary *)paramsForAPi:(YMBaseAPIManager *)manager{
+    if ([manager isKindOfClass:[CPDT2APIManager class]]) {
+        return @{@"bucketName":@"cmVsZWFzZS0xeWQ="};
+    }
+    return nil;
+}
+
+- (void)manager:(YMBaseAPIManager *)manager fileData:(id<AFMultipartFormData>)data{
+    if ([manager isKindOfClass:[CPDT2APIManager class]]) {
+        
+        NSData *imageData = UIImagePNGRepresentation([UIImage imageNamed:@"2.png"]);
+        
+        if (!imageData) {
+            return ;
+        }
+        
+    
+    NSString * fileName = [NSString stringWithFormat:@"ios%@0%@.png",  @(arc4random()%500),@(arc4random()%100)];
+        
+        [data appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/png"];
+    }
+
+}
+
+- (void)manager:(YMBaseAPIManager *)manager progress:(NSProgress *)progress{
+    if ([manager isKindOfClass:[CPDT2APIManager class]]) {
+        NSLog(@"progress ---> %@",progress);
+    }
+    
+}
+
+
+- (NSDictionary *)headerFieldsForAPi:(YMBaseAPIManager *)manager{
+    if ([manager isKindOfClass:[CPDT2APIManager class]]) {
+        return @{@"Authorization":@"Bearer 2501e734c67a3bc0911a28e9fd18552b"};
+    }
+    return nil;
+}
+
+
 
 - (NSTimeInterval)globalTimeOutForMethod:(NSString *)method host:(NSString *)host{
     return 10;

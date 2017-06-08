@@ -7,10 +7,10 @@
 //
 
 #import "YMRequestGenerator.h"
-#import "AFNetworking.h"
 #import "YMAPIService.h"
 #import "YMAPIServiceFactory.h"
 #import "NSURLRequest+ymRequestParams.h"
+#import "YMLog.h"
 @interface YMRequestGenerator ()
 
 @property (nonatomic,strong) AFHTTPRequestSerializer *formSerializer;
@@ -70,7 +70,7 @@
         tempHeaderDic = [self.genDelegate globalHeaderFieldsForMethod:type
                                                            host:service.apiBaseUrl];
     }
-    [requestParams setValuesForKeysWithDictionary:fields];
+    [requestHeader setValuesForKeysWithDictionary:fields];
     [requestHeader setValuesForKeysWithDictionary:tempHeaderDic];
     [requestHeader enumerateKeysAndObjectsUsingBlock:^(NSString  * _Nonnull  key, NSString   * _Nonnull obj, BOOL * _Nonnull stop) {
         [request setValue:obj forHTTPHeaderField:key];
@@ -83,9 +83,65 @@
                                                             host:service.apiBaseUrl];
     }
     request.timeoutInterval = globalTimeout;
+    [YMLog logDebugInfoWithRequest:request apiName:methodName service:service requestParams:params httpMethod:type];
     
     return request;
 }
+
+- (NSURLRequest *)generateUploadRequestWithParams:(NSDictionary *)params
+                                serviceIdentifier:(NSString *)identifier
+                                       methodName:(NSString *)methodName
+                                      requestType:(NSString *)type
+                                     headerFields:(NSDictionary *)fields
+                                         fileData:(void (^)(id<AFMultipartFormData>  _Nonnull formData))block{
+    
+    NSError *serializationError = nil;
+    AFHTTPRequestSerializer *serializer = self.formSerializer;
+    
+    YMAPIService *service = [[YMAPIServiceFactory sharedInstance]
+                             serviceWithIdentifier:identifier];
+    
+    NSString *urlString = [[NSString stringWithFormat:@"%@%@",service.apiBaseUrl,methodName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    //全局配置变量
+    
+    //设置请求参数
+    NSDictionary *tempParamDic = nil;
+    
+    if (self.genDelegate && [self.genDelegate respondsToSelector:@selector(globalParamsForMethod:host:)]) {
+        tempParamDic = [self.genDelegate globalParamsForMethod:type
+                                                          host:service.apiBaseUrl];
+    }
+    
+    NSMutableDictionary *requestParams = [@{} mutableCopy];
+    [requestParams setValuesForKeysWithDictionary:params];
+    [requestParams setValuesForKeysWithDictionary:tempParamDic];
+    
+    NSMutableURLRequest *request = [serializer multipartFormRequestWithMethod:@"POST" URLString:urlString parameters:requestParams constructingBodyWithBlock:block error:&serializationError];
+    
+    request.requestParams = requestParams;
+    
+    //设置请求头
+    NSMutableDictionary *requestHeader = [@{} mutableCopy];
+    NSDictionary *tempHeaderDic = nil;
+    if (self.genDelegate && [self.genDelegate respondsToSelector:@selector(globalHeaderFieldsForMethod:host:)]) {
+        tempHeaderDic = [self.genDelegate globalHeaderFieldsForMethod:type
+                                                                 host:service.apiBaseUrl];
+    }
+    [requestHeader setValuesForKeysWithDictionary:fields];
+    [requestHeader setValuesForKeysWithDictionary:tempHeaderDic];
+    [requestHeader enumerateKeysAndObjectsUsingBlock:^(NSString  * _Nonnull  key, NSString   * _Nonnull obj, BOOL * _Nonnull stop) {
+        [request setValue:obj forHTTPHeaderField:key];
+    }];
+    
+    //设置超时时间
+    //不设置
+    [YMLog logDebugInfoWithRequest:request apiName:methodName service:service requestParams:params httpMethod:type];
+
+    return request;
+}
+
+
 
 #pragma mark - Getters and Setters
 - (AFHTTPRequestSerializer *)formSerializer{
