@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "YMMultipartFormData.h"
 
 @class YMBaseAPIManager;
 @class YMAPIResponse;
@@ -116,7 +117,7 @@ typedef void(^FetchCallBackBlock)(Boolean isSuccess,id responseData,YMBaseAPIMan
 @protocol YMAPIManagerDownUploadProtocol <NSObject>
 
 //数据
-- (void)manager:(YMBaseAPIManager *)manager fileData:(id) data;
+- (void)manager:(YMBaseAPIManager *)manager fileData:(id<YMMultipartFormData>) data;
 
 //进度条
 - (void)manager:(YMBaseAPIManager *)manager progress:(NSProgress *)progress;
